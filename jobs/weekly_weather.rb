@@ -1,7 +1,5 @@
 require "net/http"
 require "json"
-require "open-uri"
-require "geocoder"
 
 
 # If these are left blank, the script will try to locate you using your IP address
