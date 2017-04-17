@@ -5,34 +5,22 @@ require "geocoder"
 
 
 # If these are left blank, the script will try to locate you using your IP address
-$latitude = ""  # Optional
-$longitude = "" # Optional
-$location = ""  # Optional
+latitude = ""                   # Required
+longitude = ""                  # Required
+location = "Town,<br>Country"   # Change me
 
 units = "uk"
-symbol = "C"    
-key = ""        # Required
+symbol = "C"
+key = ""                        # Required
 
 def ftoc (f)
     c = (f-32)*5/9
 end
 
-def setLocationInfo()
-    # Get your current public IP address. If this fails for whatever reason (i.e. the site has gone down), manually fill in the variables above or select another service from here http://stackoverflow.com/a/13270734/1295906
-    remote_ip = open('http://whatismyip.akamai.com').read
-        
-    $location = "#{Geocoder.search(remote_ip).first.city},<br>#{Geocoder.search(remote_ip).first.state}"
-    $latitude = Geocoder.search(remote_ip).first.latitude
-    $longitude = Geocoder.search(remote_ip).first.longitude    
-end
-
-if($latitude == "" || $longitude == "" || $location == "")
-    setLocationInfo()
-end
     
 SCHEDULER.every "15m", :first_in => 0 do |job|
 
-    uri = URI("https://api.darksky.net/forecast/#{key}/#{$latitude},#{$longitude}?units=#{units}")
+    uri = URI("https://api.darksky.net/forecast/#{key}/#{latitude},#{longitude}?units=#{units}")
     req = Net::HTTP::Get.new(uri.path)
 
     # Make request
@@ -68,7 +56,7 @@ SCHEDULER.every "15m", :first_in => 0 do |job|
                 summary:  todaysSummary,
                 code: currentlyIcon,
                 element: 'currentWeatherIcon',
-                location: $location
+                location: location
             }
 
     end

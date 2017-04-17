@@ -9,14 +9,13 @@ A widget for the Dashing framework to display live weather updates using darksky
 
 
 
-1. You need an access token to use darksky's weather API. This can be obtained [here](https://darksky.net/dev/)
+1. You will need to add the following gems to your `Gemfile`: `"net/http`
+2. You need an access token to use darksky's weather API. This can be obtained [here](https://darksky.net/dev/) 
 3. Copy `weekly_weather.html`, `weekly_weather.coffee`, and `weekly_weather.scss` into the `/widgets/weekly_weather` directory. Put the `weekly_weather.rb` file in your `/jobs` folder.
 4. Copy the additional `font/` and `stylesheets/` assets resources into your `/assets` folder
-4. You must edit the following variables in `weekly_weather.rb`:
+5. You must edit the following variables in `weekly_weather.rb`:
 	
     `key` - Your access token from above
-
-5. The widget will either obtain your location automatically using your IP address (won't be 100% accurate), or you can override this by completing the following variables:
 
     `$latitude` - The latitude of your current location
     
